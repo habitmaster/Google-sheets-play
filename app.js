@@ -1,5 +1,5 @@
 
-const output = document.querySelector('.output');
+const table = document.querySelector("table");
 const id = '1CmQGM1ik9naPVDTLoBaBKC1AzopZdEWDc48REaFSmyk';
 const base = 'https://docs.google.com/spreadsheets/d/';
 const q1 = '/gviz/tq?';
@@ -13,47 +13,40 @@ let temp = data.replace('/*O_o*/','');
 temp = temp.replace('google.visualization.Query.setResponse(','');
 temp = temp.replace(');','');
 const jsonData = JSON.parse(temp);
-console.log(jsonData.table); 
-const headings = makeCell(output, '', 'heading');
-jsonData.table.cols.forEach((col)=>{
- console.log(col);
-    const el = makeCell(headings, col.label, 'box') 
-})
 jsonData.table.rows.forEach((row)=>{
-    console.log(row);
-    const div = makeCell(output, '','row');
     row.c.forEach((cell)=>{
-    const ele1 = makeCell(div,`${cell.v}`,'box');
-});
+        console.log(`${cell.v}`)
+    });
+})
+
+generateTableHead(table, jsonData, "heading")
+generateTable(table,jsonData,"tablerow")
 })
 
 
-});
-
-function makeCell(parent, html, classAdd){
-    const ele = document.createElement('div');
-    parent.append(ele);
-    ele.innerHTML = html; 
-    ele.classList.add(classAdd);
-       return ele;
-}
-
-// cell.v
-
-
-// const rows = jsonData.table.rows;
-// rows.forEach((row) =>{
-//   const div = document.createElement("div");
-//     const temp1 = row.c;
-//     temp1.forEach((cell)=>{
-//       const box = document.createElement("div");
-//         box.textContent = cell.v;
-//         box.classList.add("box");
-//         div.append(box);
-//     })
-//     output.append(div);
-//     });
-// });
+function generateTableHead(table, input, classAdd) {
+    let thead = table.createTHead();
+    thead.classList.add(classAdd);
+    let row = thead.insertRow();
+    input.table.cols.forEach((col)=>{
+        let th = document.createElement("th");
+        let text = document.createTextNode(col.label);
+        th.appendChild(text);
+      row.appendChild(th);
+    })
+     
+    }
 
 
+    function generateTable(table, input, classAdd) {
+        input.table.rows.forEach((row)=>{
+          let rowCreate = table.insertRow();
+          rowCreate.classList.add(classAdd);
+                row.c.forEach((cell)=>{
+                    let cellcreate = rowCreate.insertCell();
+                    let text = document.createTextNode(cell.v);
+                    cellcreate.appendChild(text);               
+                })})
 
+    }
+    

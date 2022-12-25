@@ -3,15 +3,29 @@
 }
 
 .box {
-    display:inline-block;
+    display:inline;
 width: 10%; 
 text-align: center;
 }
 
 .heading {
+    text-align: center;
+    width: 100%;
     font-weight: bold;
     font-size: 1.0em;
 color:white;
 background-color:black;
+position: sticky;
 }
 
+.table{
+    width: 100%;
+}
+
+.tablerow{
+    text-align: center;
+    width: 100%;
+    font-size: 1.0em;
+color:black;
+background-color:white;
+}

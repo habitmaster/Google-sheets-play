@@ -26,6 +26,12 @@ position: sticky;
     text-align: center;
     width: 100%;
     font-size: 1.0em;
+    font-weight: lighter;
 color:black;
 background-color:white;
 }
+
+.percentage{
+   color: red;
+}
+
